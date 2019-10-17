@@ -6,14 +6,14 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 14:29:54 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/15 20:00:07 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/16 18:04:27 by asultanb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include <stdio.h>
 
-void make_board(char *piece, t_board **board, int pos)//This works I think
+void make_board(char *piece, t_board **board, int pos)//Doesn't work
 {
     int i;
     int n;
@@ -22,25 +22,24 @@ void make_board(char *piece, t_board **board, int pos)//This works I think
     n = 0;
     while (piece[n])
     {
-        if (piece[n] == '\n')
-            {
-                i++;
-                n++;
-            }
-        if ((*board)->str[pos + i] == '#' || (*board)->str[pos + i] == '\n')
-            i++;
-            //i += (pos + i) % 4;
-            //i += (*board)->size;
-        else if (piece[n] == '#')
+		if (piece[n] == '\n')
+		{
+			pos += (*board)->size + 1;
+			printf("new position: %i\n", pos);
+			i = 0;
+		}
+		else if (piece[n] == '#')
         {
-            (*board)->str[pos + i] = '#';
-            i++;
+			(*board)->str[pos + i] = '#';
+			i++;
         }
+		else if (piece[n] == '.')
+			i++;
         n++;
     }
 }
 
-int findspot(t_piece *piece, char *board, int *pos, int size)//This works but only sometimes
+int findspot(t_piece *piece, char *board, int *pos, int size)//Works fine, but needs more tests.
 {
     int i;
     int n;
@@ -56,11 +55,16 @@ int findspot(t_piece *piece, char *board, int *pos, int size)//This works but on
        while (piece->value[n] && board[*pos + i])
         {
             if (piece->value[n] == '#' && board[*pos + i] == '#')
-                break ;
+				 break ;
             else if (piece->value[n] == '\n')
                 i += size;
             else if (n == len - 1)
+			{
+				ft_putstr("position: ");
+				ft_putnbr(*pos);
+				ft_putchar('\n');
                 return (TRUE);
+			}
             else if (piece->value[n] == '#')
                 i++;
             n++;
@@ -106,7 +110,7 @@ int main()
     board->size = 4;
     board->str = ft_strdup("#...\n#...\n#...\n#...");
     piece->size = 4;
-    piece->value = ft_strdup(P12);
+    piece->value = ft_strdup(P17);
     piece->previous = NULL;
     piece->next = NULL;
     solver(piece, board);
