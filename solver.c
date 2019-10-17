@@ -6,14 +6,14 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 14:29:54 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/16 18:04:27 by asultanb         ###   ########.fr       */
+/*   Updated: 2019/10/16 18:15:01 by asultanb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include <stdio.h>
 
-void make_board(char *piece, t_board **board, int pos)//Doesn't work
+void make_board(char *piece, t_board **board, int pos)//Works fine
 {
     int i;
     int n;
@@ -25,7 +25,6 @@ void make_board(char *piece, t_board **board, int pos)//Doesn't work
 		if (piece[n] == '\n')
 		{
 			pos += (*board)->size + 1;
-			printf("new position: %i\n", pos);
 			i = 0;
 		}
 		else if (piece[n] == '#')
@@ -54,17 +53,12 @@ int findspot(t_piece *piece, char *board, int *pos, int size)//Works fine, but n
             *pos +=1;
        while (piece->value[n] && board[*pos + i])
         {
-            if (piece->value[n] == '#' && board[*pos + i] == '#')
+            if (piece->value[n] == '#' && board[*pos + i] == '0')
 				 break ;
             else if (piece->value[n] == '\n')
                 i += size;
             else if (n == len - 1)
-			{
-				ft_putstr("position: ");
-				ft_putnbr(*pos);
-				ft_putchar('\n');
                 return (TRUE);
-			}
             else if (piece->value[n] == '#')
                 i++;
             n++;
@@ -108,7 +102,7 @@ int main()
     board = (t_board *)malloc(sizeof(t_board));
     piece = (t_piece *)malloc(sizeof(t_piece));
     board->size = 4;
-    board->str = ft_strdup("#...\n#...\n#...\n#...");
+    board->str = ft_strdup("0...\n0...\n0...\n0...");
     piece->size = 4;
     piece->value = ft_strdup(P17);
     piece->previous = NULL;
