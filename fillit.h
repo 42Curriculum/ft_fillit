@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 13:46:17 by jjosePhi          #+#    #+#             */
-/*   Updated: 2019/10/15 17:49:54 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/16 11:54:24 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_pieces
 {
 	int		size;
 	char	*value;
+	int		type;
 	struct s_pieces *next;
 	struct s_pieces *previous;
 }				t_piece;
