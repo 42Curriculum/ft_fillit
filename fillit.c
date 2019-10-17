@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 13:42:10 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/16 19:38:30 by asultanb         ###   ########.fr       */
+/*   Updated: 2019/10/16 19:40:07 by asultanb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,14 @@ int reader(t_piece **piece_l, int fd)
 	{
 		if (ft_strlen(line) == 0 && ln == 4)
 		{
+			ln = 0;
 			current = ft_double_list_add(&current, ft_strlen(piece), piece);
 		}
 		else
 		{
 			ft_putstr("error");
 		}
+		ln++;
 	}
 }
 
