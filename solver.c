@@ -6,14 +6,22 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 14:29:54 by jjosephi          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2019/10/17 15:13:32 by jjosephi         ###   ########.fr       */
+=======
+/*   Updated: 2019/10/16 18:15:01 by asultanb         ###   ########.fr       */
+>>>>>>> ae02d7a000a973837ccdff9f1022aa03b6fb1b6e
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include <stdio.h>
 
+<<<<<<< HEAD
 void make_board(char *piece, t_board **board, int pos, int size)//This works I think
+=======
+void make_board(char *piece, t_board **board, int pos)//Works fine
+>>>>>>> ae02d7a000a973837ccdff9f1022aa03b6fb1b6e
 {
     int i;
     int n;
@@ -59,11 +67,13 @@ int findspot(t_piece *piece, char *board, int *pos, int size)//Works ''fin'e, bu
                 i += size;
             }
             else if (n == len - 1)
+<<<<<<< HEAD
 			{
 				ft_putnbr(*pos);
 				ft_putchar('\n');
+=======
+>>>>>>> ae02d7a000a973837ccdff9f1022aa03b6fb1b6e
                 return (TRUE);
-			}
             else if (piece->value[n] == '#')
                 i++;
             n++;
@@ -108,7 +118,11 @@ int main()
     board = (t_board *)malloc(sizeof(t_board));
     piece = (t_piece *)malloc(sizeof(t_piece));
     board->size = 4;
+<<<<<<< HEAD
     board->value = ft_strdup("0...\n0...\n0...\n0...");
+=======
+    board->str = ft_strdup("0...\n0...\n0...\n0...");
+>>>>>>> ae02d7a000a973837ccdff9f1022aa03b6fb1b6e
     piece->size = 4;
     piece->value = ft_strdup(P17);
     piece->prev = NULL;
