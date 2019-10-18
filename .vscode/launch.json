@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "/nfs/2019/j/jjosephi/Documents/Fillit/a.out",
-            "args": [],
+            "args": [sample],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
