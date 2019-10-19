@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 13:42:10 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/18 19:08:09 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/18 20:03:12 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,15 @@ int make_piece(char *input, char *m_piece, int i, int n)
 	return (FALSE);
 }
 
-int reader(int fd, char **p_array)
+int reader(int fd, char **p_array, t_piece *pieces_list)
 {
 	char *line;
 	char *input;
 	int ln;
 	int i;
+	int size;
 	
+	size = 0;
 	ln = 0;
 	line = NULL;
 	input = ft_strnew(1);
@@ -111,10 +113,11 @@ int reader(int fd, char **p_array)
 			i = 0;
 			while (i < 19) 
 			{
-			//	printf("%i\n", i);
 				if (make_piece(input, p_array[i], 0, 0))
 				{
 					printf("YES %i \n%s\n vs \n%s\n\n", i, p_array[i], input);
+					size += ((i < 3) ? 4 : 6);
+					ft_double_list_add(pieces_list, (i < 3) ? 4 : 6, i);
 					break ;
 				}
 				i++;
@@ -125,24 +128,29 @@ int reader(int fd, char **p_array)
 		}
 		ln++;
 	}
-	//printf("line: \n%s", input);
-	return 0;
+	return size;
 }
 
 int		main(int argc, char **argv)
 {
-	int 	fd; //file descriptor
+	int 	fd;
 	char	*pieces[19] = {P1, P2, P3, P4 ,P5, P6, P7, P8, P9,
 	P10, P11, P12, P13, P14, P15, P16, P17, P18, P19};
+	t_board *board;
+	t_piece *piece_list;
+	int size;
+	
+	piece_list = "";
 	if (argc == 2)
 	{
 		fd = open(argv[1], O_RDONLY);
-		//Read file
-		if (!(reader(fd, pieces)))
+		if (!(size = reader(fd, pieces, piece_list)))
 			return (FALSE);
 		//If no error place pieces in list and check size; - F
-		//define board size with pieces len => Sqrt(EParea) - F
-		//Solve - S
+		board->size = size;
+		new_board(size);
+		if(solver(piece_list, board, pieces))
+			//print board
 	}
 	else
 		ft_putendl("usage: fillit wrong number of arguments");
