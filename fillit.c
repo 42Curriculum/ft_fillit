@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 13:42:10 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/17 21:03:25 by asultanb         ###   ########.fr       */
+/*   Updated: 2019/10/18 19:08:09 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,20 @@ int	check_row(char *mpiece, int i)
 {
 	int	mod_i;
 
-	mod_i = i % 4;
-	if (mod_i != 3 && mpiece[i + 1] == '#')
-		return (TRUE);
-	if (mod_i != 0 && mpiece[i - 1] == '#')
-		return (TRUE);
+	mod_i = 1;
+	while (mpiece[i + mod_i] != '\n' && i + mod_i <= 18)
+	{
+		if (mpiece[i + mod_i] == '#')
+			return (TRUE);
+		mod_i++;
+	}
+	mod_i = 1;
+	while (i - mod_i >= 0 && mpiece[i - mod_i] != '\n')
+	{
+		if ( mpiece[i - mod_i] == '#')
+			return (TRUE);
+		mod_i++;
+	}
 	return (FALSE);
 }
 
@@ -28,12 +37,12 @@ int check_col(char *mpiece, int i)
 {
 	int mod_i;
 	
-	mod_i = i % 4;
-	while (mod_i < 16)
+	mod_i = i % 5;
+	while (mod_i < 18)
 	{
 		if (mpiece[mod_i] == '#')
 			return (TRUE);
-		mod_i += 4;
+		mod_i += 5;
 	}
 	return (FALSE);
 }
@@ -42,9 +51,7 @@ int make_piece(char *input, char *m_piece, int i, int n)
 {
 	while (input[i])
 	{
-		if (input[i] == '\n')
-		if (m_piece[n] == '\n')
-			n++;
+		
 		if (input[i] == '#')
 		{
 			if (m_piece[n] == '#')
@@ -65,6 +72,18 @@ int make_piece(char *input, char *m_piece, int i, int n)
 					return (FALSE);
 			}
 			i++;
+		}
+		else if (input[i] == '\n')
+		{
+			if (m_piece[n] == '\n')
+			{
+				i++;
+				n++;
+			}
+			else //if (n == (int)ft_strlen(m_piece))
+				i++;
+		/* 	else
+				return (FALSE); */
 		}
 	}
 	if (n == (int)ft_strlen(m_piece))
@@ -92,21 +111,21 @@ int reader(int fd, char **p_array)
 			i = 0;
 			while (i < 19) 
 			{
-				printf("%i\n", i);
+			//	printf("%i\n", i);
 				if (make_piece(input, p_array[i], 0, 0))
 				{
-
-					printf("YES %i \n%s\n", i, p_array[i]);
+					printf("YES %i \n%s\n vs \n%s\n\n", i, p_array[i], input);
 					break ;
 				}
 				i++;
 			}
  			free (input);
+			input = ft_strnew(0);
 			free (line);
 		}
 		ln++;
 	}
-	printf("line: \n%s", input);
+	//printf("line: \n%s", input);
 	return 0;
 }
 
