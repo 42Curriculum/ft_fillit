@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 14:29:54 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/18 20:05:08 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/19 14:28:35 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int findspot(char *piece, char *board, int *pos, int size)//Works ''fin'e, but n
     int n;
     int len;
 
-    len = ft_strlen(piece[n]);
+    len = ft_strlen(piece);
     while (board[*pos])
     {
         i = 0;
@@ -83,36 +83,13 @@ int solver(t_piece *p_list, t_board *board, char **m_pieces)
     board_tmp = ft_strdup((board)->value);
     if (findspot(m_pieces[p_list->value], board_tmp, &pos, board->size) == TRUE)
         make_board(m_pieces[p_list->value], &board, pos, (p_list->letter));
-/*     else if (findspot(p_list, board_tmp, &pos, board->size) == FALSE &&  !(p_list->next))
-        return (FALSE); */
- /*    while (p_list->next && (solver(p_list->next, board) == FALSE))// not work when last
+    else if (!(p_list->next))
+        return (FALSE);
+    while ((solver(p_list, board, m_pieces) == FALSE))
     {
-        if (findspot(p_list, board_tmp, &pos, (board)->size) == TRUE)
-            make_board(p_list->piece, &board, pos);
-        else 
-        { 
-            ft_strdel(&board_tmp);
-            return (FALSE);
-        }
+            p_list = p_list->prev;
     }
-    ft_strdel(&board_tmp); */
+    
+    ft_strdel(&board_tmp);
     return (TRUE);
 }
-
-/* int main()
-{
-    t_board *board;
-    t_piece *piece;
-
-    board = (t_board *)malloc(sizeof(t_board));
-    piece = (t_piece *)malloc(sizeof(t_piece));
-    board->size = 4;
-    board->value = ft_strdup("0...\n0...\n0...\n0...");
-    piece->size = 4;
-    piece->value = ft_strdup(P17);
-    piece->prev = NULL;
-    printf("%s\n",board->value);
-    piece->next = NULL;
-    solver(piece, board);
-    printf("%s",board->value);
-} */

@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/13 14:41:54 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/18 19:43:26 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/19 14:05:41 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_piece *ft_double_lst_init(int size, int value)
     t_piece *list;
     static char letter;
 
+    list = malloc(sizeof(t_piece));
     if (letter > 'A' && letter > 'Z')
         letter = 'A';
     

@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 13:42:10 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/18 20:03:12 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/19 14:03:18 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,6 @@ int reader(int fd, char **p_array, t_piece *pieces_list)
 			{
 				if (make_piece(input, p_array[i], 0, 0))
 				{
-					printf("YES %i \n%s\n vs \n%s\n\n", i, p_array[i], input);
 					size += ((i < 3) ? 4 : 6);
 					ft_double_list_add(pieces_list, (i < 3) ? 4 : 6, i);
 					break ;
@@ -140,17 +139,17 @@ int		main(int argc, char **argv)
 	t_piece *piece_list;
 	int size;
 	
-	piece_list = "";
+	board = malloc(sizeof(t_board));
+	piece_list = malloc(sizeof(t_piece));
 	if (argc == 2)
 	{
 		fd = open(argv[1], O_RDONLY);
 		if (!(size = reader(fd, pieces, piece_list)))
 			return (FALSE);
-		//If no error place pieces in list and check size; - F
 		board->size = size;
 		new_board(size);
 		if(solver(piece_list, board, pieces))
-			//print board
+			ft_putstr(board->value);
 	}
 	else
 		ft_putendl("usage: fillit wrong number of arguments");
