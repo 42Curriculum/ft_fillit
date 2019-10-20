@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asultanb <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 12:19:27 by asultanb          #+#    #+#             */
-/*   Updated: 2019/10/20 13:01:31 by asultanb         ###   ########.fr       */
+/*   Updated: 2019/10/20 14:13:17 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ int		main(int argc, char **argv)
 	if (argc == 2)
 	{
 		fd = open(argv[1], O_RDONLY);
-		if (!(read_file(fd, pieces, piece_list, &size)))
+		if (!(read_file(fd, pieces, &piece_list, &size)))
 			return (0);
 		board->size = size;
-		new_board(size);
-		if(solver(piece_list, board, pieces))
+		board->value = new_board(size);
+		if (solver(piece_list, board, pieces))
 			ft_putstr(board->value);
 	}
 	else

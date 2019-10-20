@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 13:42:10 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/20 13:33:49 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/20 14:15:37 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ int make_piece(char *input, char *m_piece, int i, int n)
 	{
 		if (input[i] != '#' && input[i] != '.' && input[i] != '\n')
 			return (FALSE);
-		if (input[i] == '#' && m_piece[n] == '#')
+		if (input[i] == '#')
 		{
-			i++;
-			n++;
+			if (m_piece[n++] == '#')
+				i++;
+			else
+				return (FALSE);
 		}
-		else
-			return (FALSE);
 		if (input[i] == '.')
 		{
 			if (check_row(input, i) && check_col(input, i))
@@ -73,10 +73,10 @@ int make_piece(char *input, char *m_piece, int i, int n)
 		else if (input[i++] == '\n' && m_piece[n] == '\n')
 			n++;
 	}
-	return (n == (int)ft_strlen(m_piece)) ? TRUE : FALSE;
+	return ((n + 1) == (int)ft_strlen(m_piece)) ? TRUE : FALSE;
 }
 
-int		get_piece(char *input, char **p_array, t_piece *pieces_list, int *size)
+int		get_piece(char *input, char **p_array, t_piece **pieces_list, int *size)
 {
 	int		i;
 
@@ -86,7 +86,7 @@ int		get_piece(char *input, char **p_array, t_piece *pieces_list, int *size)
 		if (make_piece(input, p_array[i], 0, 0))
 		{
 			*size += ((i < 3) ? 4 : 6);
-			ft_double_list_add(pieces_list, (i < 3) ? 4 : 6, i);
+			pieces_list = ft_double_list_add(pieces_list, (i < 3) ? 4 : 6, i);
 			return (TRUE);
 		}
 		i++;
@@ -94,7 +94,7 @@ int		get_piece(char *input, char **p_array, t_piece *pieces_list, int *size)
 	return (FALSE);
 }
 
-int		read_file(int fd, char **p_array, t_piece *pieces_list, int *size)
+int		read_file(int fd, char **p_array, t_piece **pieces_list, int *size)
 {
 	char *line;
 	char *input;

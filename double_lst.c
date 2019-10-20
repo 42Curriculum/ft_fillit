@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/13 14:41:54 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/19 14:05:41 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/20 14:15:48 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,22 @@ t_piece *ft_double_lst_init(int size, int value)
     list->letter = letter; 
     list->size = size;
     list->prev = NULL;
-    list->prev = NULL;
+    list->next = NULL;
     letter++;
     return (list);   
 }
 
-t_piece *ft_double_list_add(t_piece *prev, int size, int value)
+t_piece **ft_double_list_add(t_piece **prev, int size, int value)
 {
     t_piece *piece;
     
     piece = ft_double_lst_init(size, value);
-    if (!(prev))
+    if (!(*prev->value))
         piece->prev = NULL;
     else
     {
         piece->prev = prev;
+        prev->next = piece;
     }
     return (piece);
 }
