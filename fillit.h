@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 13:46:17 by jjosePhi          #+#    #+#             */
-/*   Updated: 2019/10/20 12:51:39 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/20 13:34:10 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,10 @@ typedef struct		s_board
 	int				size;
 	char			*value;
 }					t_board;
-t_piece *ft_double_list_add(t_piece *prev, int size, int value);
-t_piece *ft_double_lst_init(int size, int value);
+t_piece	*ft_double_list_add(t_piece *prev, int size, int value);
+t_piece	*ft_double_lst_init(int size, int value);
 char *new_board(int size);
-int solver(t_piece *p_list, t_board *board, char **m_pieces);
+int		solver(t_piece *p_list, t_board *board, char **m_pieces);
+int		read_file(int fd, char **p_array, t_piece *pieces_list, int *size);
 
 #endif
