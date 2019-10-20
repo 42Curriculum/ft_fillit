@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 13:42:10 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/19 14:03:18 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/20 13:32:17 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,44 +51,29 @@ int make_piece(char *input, char *m_piece, int i, int n)
 {
 	while (input[i])
 	{
-		
-		if (input[i] == '#')
+		if (input[i] != '#' && input[i] != '.' && input[i] != '\n')
+			return (FALSE);
+		if (input[i] == '#' && m_piece[n] == '#')
 		{
-			if (m_piece[n] == '#')
-			{
-				i++;
-				n++;
-			}
-			else
-				return (FALSE);
+			i++;
+			n++;
 		}
-		else if (input[i] == '.')
+		else
+			return (FALSE);
+		if (input[i] == '.')
 		{
 			if (check_row(input, i) && check_col(input, i))
 			{
-				if (m_piece[n] == '.')
-					n++;
-				else
+				if (m_piece[n] != '.')
 					return (FALSE);
+				n++;
 			}
 			i++;
 		}
-		else if (input[i] == '\n')
-		{
-			if (m_piece[n] == '\n')
-			{
-				i++;
-				n++;
-			}
-			else //if (n == (int)ft_strlen(m_piece))
-				i++;
-		/* 	else
-				return (FALSE); */
-		}
+		else if (input[i++] == '\n' && m_piece[n] == '\n')
+			n++;
 	}
-	if (n == (int)ft_strlen(m_piece))
-		return (TRUE);
-	return (FALSE);
+	return (n == (int)ft_strlen(m_piece)) ? TRUE : FALSE;
 }
 
 int reader(int fd, char **p_array, t_piece *pieces_list)
@@ -101,7 +86,7 @@ int reader(int fd, char **p_array, t_piece *pieces_list)
 	
 	size = 0;
 	ln = 0;
-	line = NULL;
+	line = NULL; 
 	input = ft_strnew(1);
 	line = ft_strnew(1);
 	while (get_next_line(fd, &line))

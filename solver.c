@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 14:29:54 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/19 14:28:35 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/20 12:56:36 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,19 +77,28 @@ int solver(t_piece *p_list, t_board *board, char **m_pieces)
     char *board_tmp;
     int pos;
 
-    
     pos = 0;
     board_tmp = (char *)malloc((sizeof(char *)* (board)->size + 1));
     board_tmp = ft_strdup((board)->value);
-    if (findspot(m_pieces[p_list->value], board_tmp, &pos, board->size) == TRUE)
-        make_board(m_pieces[p_list->value], &board, pos, (p_list->letter));
-    else if (!(p_list->next))
-        return (FALSE);
-    while ((solver(p_list, board, m_pieces) == FALSE))
+    if (!(findspot(m_pieces[p_list->value], board_tmp, &pos, board->size)))
     {
-            p_list = p_list->prev;
+        if (!(p_list->prev))
+        {
+            board ->value = new_board(board->size + 1);
+            solver(p_list, board, m_pieces);
+        }
+        else
+            solver(p_list->prev, board, m_pieces);
     }
-    
+    else
+    {
+        make_board(m_pieces[p_list->value], &board, pos, (p_list->letter));
+        if (!p_list->next)
+            return (TRUE);
+        else
+            if(solver(p_list->next, board, m_pieces))
+                return (TRUE);   
+    }
     ft_strdel(&board_tmp);
     return (TRUE);
 }

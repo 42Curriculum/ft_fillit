@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 13:46:17 by jjosePhi          #+#    #+#             */
-/*   Updated: 2019/10/18 20:01:59 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/20 12:51:39 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct		s_board
 }					t_board;
 t_piece *ft_double_list_add(t_piece *prev, int size, int value);
 t_piece *ft_double_lst_init(int size, int value);
-void new_board(int size);
+char *new_board(int size);
 int solver(t_piece *p_list, t_board *board, char **m_pieces);
 
 #endif
