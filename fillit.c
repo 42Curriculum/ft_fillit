@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 13:42:10 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/20 14:15:37 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/20 18:44:42 by asultanb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,30 +76,36 @@ int make_piece(char *input, char *m_piece, int i, int n)
 	return ((n + 1) == (int)ft_strlen(m_piece)) ? TRUE : FALSE;
 }
 
-int		get_piece(char *input, char **p_array, t_piece **pieces_list, int *size)
+int		get_piece(char *input, char **p_array, int (*pieces_arr)[], int *size)
 {
-	int		i;
+	int	i;
+	int k;
 
 	i = 0;
+	k = 0;
 	while (i < 19)
 	{
 		if (make_piece(input, p_array[i], 0, 0))
 		{
 			*size += ((i < 3) ? 4 : 6);
-			pieces_list = ft_double_list_add(pieces_list, (i < 3) ? 4 : 6, i);
-			return (TRUE);
+			while ((*pieces_arr)[k] >= 0)
+				k++;
+			(*pieces_arr)[k] = i;
+			return (1);
 		}
 		i++;
 	}
-	return (FALSE);
+	return (0);
 }
 
-int		read_file(int fd, char **p_array, t_piece **pieces_list, int *size)
+int		read_file(int fd, char **p_array, int (*pieces_arr)[])
 {
-	char *line;
-	char *input;
-	int ln;
+	char	*line;
+	char	*input;
+	int		ln;
+	int		size;
 	
+	size = 0;
 	ln = 0;
 	input = ft_strnew(0);
 	line = ft_strnew(0);
@@ -109,13 +115,13 @@ int		read_file(int fd, char **p_array, t_piece **pieces_list, int *size)
 		if (ft_strlen(line) == 0 && ln == 4)
 		{
 			ln = -1;
-			if (!(get_piece(input, p_array, pieces_list, size)))
-				return (FALSE);
+			if (!(get_piece(input, p_array, pieces_arr, &size)))
+				return (0);
  			free (input);
 			input = ft_strnew(0);
 			free (line);
 		}
 		ln++;
 	}
-	return (TRUE);
+	return (size);
 }

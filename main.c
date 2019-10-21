@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 12:19:27 by asultanb          #+#    #+#             */
-/*   Updated: 2019/10/20 14:13:17 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/20 18:33:18 by asultanb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,24 @@
 
 int		main(int argc, char **argv)
 {
+	t_board	*board;
 	int 	fd;
+	int		pieces_arr[26];
+	int 	size;
 	char	*pieces[19] = {P1, P2, P3, P4 ,P5, P6, P7, P8, P9,
 	P10, P11, P12, P13, P14, P15, P16, P17, P18, P19};
-	t_board *board;
-	t_piece *piece_list;
-	int size;
-	
-	if (!(board = malloc(sizeof(t_board))) || !(piece_list = malloc(sizeof(t_piece))))
+
+	ft_memset(pieces_arr, -1, 26);
+	if (!(board = malloc(sizeof(t_board))))
 			return (0);
 	if (argc == 2)
 	{
 		fd = open(argv[1], O_RDONLY);
-		if (!(read_file(fd, pieces, &piece_list, &size)))
-			return (0);
+		if (!(size = read_file(fd, pieces, &pieces_arr)))
+			return (1);
 		board->size = size;
 		board->value = new_board(size);
-		if (solver(piece_list, board, pieces))
+		if (solver(&pieces_arr, board, pieces, 0))
 			ft_putstr(board->value);
 	}
 	else
