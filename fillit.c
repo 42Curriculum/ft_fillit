@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 13:42:10 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/20 18:44:42 by asultanb         ###   ########.fr       */
+/*   Updated: 2019/10/21 11:52:10 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,9 @@ int make_piece(char *input, char *m_piece, int i, int n)
 	{
 		if (input[i] != '#' && input[i] != '.' && input[i] != '\n')
 			return (FALSE);
-		if (input[i] == '#')
-		{
-			if (m_piece[n++] == '#')
-				i++;
-			else
+		if (input[i] == '#' && (i = i + 1) && (m_piece[n++] != '#'))
 				return (FALSE);
-		}
-		if (input[i] == '.')
+		else if (input[i] == '.')
 		{
 			if (check_row(input, i) && check_col(input, i))
 			{
@@ -70,10 +65,14 @@ int make_piece(char *input, char *m_piece, int i, int n)
 			}
 			i++;
 		}
-		else if (input[i++] == '\n' && m_piece[n] == '\n')
-			n++;
+		else if (input[i] == '\n')
+		{
+			i++;
+			if (m_piece[n] == '\n')
+				n++;
+		}
 	}
-	return ((n + 1) == (int)ft_strlen(m_piece)) ? TRUE : FALSE;
+	return (n == (int)ft_strlen(m_piece)) ? TRUE : FALSE;
 }
 
 int		get_piece(char *input, char **p_array, int (*pieces_arr)[], int *size)

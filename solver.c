@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 14:29:54 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/20 19:44:38 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/21 13:02:27 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ int findspot(char *piece, char *board, int *pos, int size)//Works ''fin'e, but n
         n = 0;
        while (piece[n] && board[*pos + i])
         {
-            if (piece[n] == '#' && board[*pos + i] == '#')
-				 break ;
+            if (piece[n] == '#' && ((board[*pos + i] >= 'A' && (board[*pos + i] <= 'Z')) || (board[*pos + i] == '\n')))
+				break ;
             else if (piece[n] == '\n')
             {
                 i += size;
@@ -74,16 +74,12 @@ int findspot(char *piece, char *board, int *pos, int size)//Works ''fin'e, but n
 
 int solver(int (*pieces_arr)[], t_board *board, char *m_pieces[], int i)
 {
-
     int pos;
 
     pos = 0;
     if (!(findspot(m_pieces[(*pieces_arr)[i]], board->value, &pos, board->size)))
     {
-		if (i == 0)
-			return (FALSE);
-        else
-            solver(pieces_arr, board, m_pieces, i - 1);
+        return (FALSE);
     }
     else
     {
@@ -91,8 +87,8 @@ int solver(int (*pieces_arr)[], t_board *board, char *m_pieces[], int i)
         if (i == 25 || (*pieces_arr)[i + 1] == -1)
             return (TRUE);
         else
-            if(solver(pieces_arr, board, m_pieces, i + 1))
-                return (TRUE);   
+            if(!(solver(pieces_arr, board, m_pieces, i + 1)))
+                return (FALSE);
     }
     return (TRUE);
 }
