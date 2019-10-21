@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 12:19:27 by asultanb          #+#    #+#             */
-/*   Updated: 2019/10/20 18:33:18 by asultanb         ###   ########.fr       */
+/*   Updated: 2019/10/20 20:32:10 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,14 @@ int		main(int argc, char **argv)
 		fd = open(argv[1], O_RDONLY);
 		if (!(size = read_file(fd, pieces, &pieces_arr)))
 			return (1);
-		board->size = size;
-		board->value = new_board(size);
-		if (solver(&pieces_arr, board, pieces, 0))
-			ft_putstr(board->value);
+		board->size = 2;
+		board->value = new_board(2);
+		while (solver(&pieces_arr, board, pieces, 0) == FALSE)
+		{
+			free(board->value);
+			board->value = new_board(++board->size);
+		}
+		ft_putstr(board->value);
 	}
 	else
 		ft_putendl("usage: fillit wrong number of arguments");

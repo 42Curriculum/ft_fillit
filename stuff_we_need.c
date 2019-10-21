@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 19:55:17 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/20 13:34:40 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/20 20:22:11 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,17 @@ char *new_board(int size)
     int i;
     char *str;
     
-    i = 0;
-    str = (char *)malloc(size * size + size);
-    while (str[i])
+    i = 1;
+    str = ft_strnew(size*size + size);
+    while (i <= (size*size + size + 1)) 
     {
-        if (i % 6 == 0)
-            str[i] = '\n';
-        str[i] = '.';
+        str[i - 1] = '.';
         i++;
+        if ((i % (size + 1) == 0 && i > 0))
+        {   str[i - 1] = '\n';
+            i++;
+        }
     }
-    str[i] = '\0';
+    str[i - 3] = '\0';
     return (str);
 }
