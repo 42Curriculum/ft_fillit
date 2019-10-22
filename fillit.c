@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 13:42:10 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/21 16:02:27 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/21 18:25:07 by asultanb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,17 @@ int	check_row(char *mpiece, int i)
 	mod_i = 1;
 	while (i - mod_i >= 0 && mpiece[i - mod_i] != '\n')
 	{
-		if ( mpiece[i - mod_i] == '#')
+		if (mpiece[i - mod_i] == '#')
 			return (TRUE);
 		mod_i++;
 	}
 	return (FALSE);
 }
 
-int check_col(char *mpiece, int i)
+int	check_col(char *mpiece, int i)
 {
 	int mod_i;
-	
+
 	mod_i = i % 5;
 	while (mod_i < 18)
 	{
@@ -47,14 +47,14 @@ int check_col(char *mpiece, int i)
 	return (FALSE);
 }
 
-int make_piece(char *input, char *m_piece, int i, int n)
+int	make_piece(char *input, char *m_piece, int i, int n)
 {
 	while (input[i])
 	{
 		if (input[i] != '#' && input[i] != '.' && input[i] != '\n')
 			return (FALSE);
 		if (input[i] == '#' && (i = i + 1) && (m_piece[n++] != '#'))
-				return (FALSE);
+			return (FALSE);
 		else if (input[i] == '.')
 		{
 			if (check_row(input, i) && check_col(input, i))
@@ -75,7 +75,7 @@ int make_piece(char *input, char *m_piece, int i, int n)
 	return (n == (int)ft_strlen(m_piece)) ? TRUE : FALSE;
 }
 
-int		get_piece(char *input, char **p_array, int (*pieces_arr)[], int *size)
+int	get_piece(char *input, char **p_array, int (*pieces_arr)[], int *size)
 {
 	int	i;
 	int k;
@@ -97,13 +97,13 @@ int		get_piece(char *input, char **p_array, int (*pieces_arr)[], int *size)
 	return (0);
 }
 
-int		read_file(int fd, char **p_array, int (*pieces_arr)[])
+int	read_file(int fd, char **p_array, int (*pieces_arr)[])
 {
 	char	*line;
 	char	*input;
 	int		ln;
 	int		size;
-	
+
 	size = 0;
 	ln = 0;
 	input = ft_strnew(0);
@@ -116,11 +116,14 @@ int		read_file(int fd, char **p_array, int (*pieces_arr)[])
 			ln = -1;
 			if (!(get_piece(input, p_array, pieces_arr, &size)))
 				return (0);
- 			free (input);
+			free(input);
 			input = ft_strnew(0);
-			free (line);
+			free(line);
 		}
-		ln++;
+		ln++;		
 	}
+	if (ft_strlen(input) == 20 && ln == 4)
+		if (!(get_piece(input, p_array, pieces_arr, &size)))
+			return (0);
 	return (size);
 }

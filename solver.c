@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 14:29:54 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/21 15:37:29 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/21 16:26:01 by asultanb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,13 @@ int findspot(char *piece, char *board, int *pos, int size)//Works ''fin'e, but n
         n = 0;
        while (piece[n] && board[*pos + i])
         {
-            if (piece[n] == '#' && ((board[*pos + i] >= 'A' && (board[*pos + i] <= 'Z')) || (board[*pos + i] == '\n')))
+            if (piece[n] == '#' && ((board[*pos + i] >= 'A' && 
+					(board[*pos + i] <= 'Z')) || (board[*pos + i] == '\n')))
 				break ;
             else if (piece[n] == '\n')
-            {
                 i += size;
-            }
             else if (n == len - 1)
-			{
-				ft_putnbr(*pos);
-				ft_putchar('\n');
                 return (TRUE);
-            }
             else if (piece[n] == '#')
                 i++;
             n++;
