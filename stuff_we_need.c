@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 19:55:17 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/21 16:02:39 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/22 10:35:13 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,16 @@ char *new_board(int size)
     }
     str[i - 2] = '\0';
     return (str);
+}
+
+int p_count(int *str)
+{
+    int i;
+
+    i = 0;
+    while (str[i] != -1)
+    {
+        i++;
+    }
+    return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 14:29:54 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/21 16:26:01 by asultanb         ###   ########.fr       */
+/*   Updated: 2019/10/22 13:28:49 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@ int findspot(char *piece, char *board, int *pos, int size)//Works ''fin'e, but n
             if (piece[n] == '#' && ((board[*pos + i] >= 'A' && 
 					(board[*pos + i] <= 'Z')) || (board[*pos + i] == '\n')))
 				break ;
+            else if (piece[n] == '.' && ((board[*pos + i] >= 'A' && 
+					(board[*pos + i] <= 'Z'))))
+                n++;
             else if (piece[n] == '\n')
                 i += size;
             else if (n == len - 1)
@@ -89,9 +92,7 @@ int solver(int (*pieces_arr)[], t_board *board, char *m_pieces[], int i)
 
     pos = 0;
     if (!(findspot(m_pieces[(*pieces_arr)[i]], board->value, &pos, board->size)))
-    {
         return (FALSE);
-    }
     else
     {
         make_board(m_pieces[(*pieces_arr)[i]], &board, pos, i);
@@ -103,9 +104,7 @@ int solver(int (*pieces_arr)[], t_board *board, char *m_pieces[], int i)
             {
                 pos = 0;
                 if(!(findspot(m_pieces[(*pieces_arr)[i]], board->value, &pos, board->size)))
-                {
                     return (FALSE);
-                }
                 else
                 {
                     clear_board(&board, i);
@@ -115,7 +114,6 @@ int solver(int (*pieces_arr)[], t_board *board, char *m_pieces[], int i)
                 }
             }
         }
-
     }
     return (TRUE);
 }
