@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 14:29:54 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/22 13:28:49 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/22 16:55:52 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void make_board(char *piece, t_board **board, int pos, int index)//This works I 
     {
 		if (piece[n] == '\n')
 		{
-			pos += (*board)->size + 1;
+			pos += (*board)->size;
 			i = 0;
 		}
 		else if (piece[n] == '#')
@@ -51,21 +51,33 @@ int findspot(char *piece, char *board, int *pos, int size)//Works ''fin'e, but n
         n = 0;
        while (piece[n] && board[*pos + i])
         {
-            if (piece[n] == '#' && ((board[*pos + i] >= 'A' && 
-					(board[*pos + i] <= 'Z')) || (board[*pos + i] == '\n')))
-				break ;
-            else if (piece[n] == '.' && ((board[*pos + i] >= 'A' && 
-					(board[*pos + i] <= 'Z'))))
-                n++;
-            else if (piece[n] == '\n')
+            if (piece[n] == '#') 
+			{
+                if (((board[*pos + i] >= 'A' && (board[*pos + i] <= 'Z')) || (board[*pos + i] == '\n')))
+                {
+                    *pos += 1;
+                    i = 0;  
+                }
+                else
+                {
+                    i++;
+                    n++;
+                }
+                
+                
+            }
+            else if (piece[n] == '\n' && (n += 1))
                 i += size;
             else if (n == len - 1)
                 return (TRUE);
-            else if (piece[n] == '#')
+            else if (piece[n] == '.')
+            {
                 i++;
-            n++;
+                 n++;
+            }
+           
         }
-        *pos += 1;
+
     }
     return (FALSE);
 }
@@ -95,7 +107,9 @@ int solver(int (*pieces_arr)[], t_board *board, char *m_pieces[], int i)
         return (FALSE);
     else
     {
+        printf ("Position : %d \n", pos);
         make_board(m_pieces[(*pieces_arr)[i]], &board, pos, i);
+        pos = 0;
         if (i == 25 || (*pieces_arr)[i + 1] == -1)
             return (TRUE);
         else
@@ -107,6 +121,7 @@ int solver(int (*pieces_arr)[], t_board *board, char *m_pieces[], int i)
                     return (FALSE);
                 else
                 {
+                    printf ("Position : %d \n", pos);
                     clear_board(&board, i);
                     make_board(m_pieces[(*pieces_arr)[i]], &board, pos, i);
                     if (i == 25 || (*pieces_arr)[i + 1] == -1)
