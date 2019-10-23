@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 14:29:54 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/22 16:55:52 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/22 18:58:32 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,40 +45,33 @@ int findspot(char *piece, char *board, int *pos, int size)//Works ''fin'e, but n
     int len;
 
     len = ft_strlen(piece);
-    while (board[*pos])
-    {
-        i = 0;
-        n = 0;
-       while (piece[n] && board[*pos + i])
+    i = 0;
+    n = 0;
+ 
+        while (board[*pos + i] && piece[n])
         {
-            if (piece[n] == '#') 
-			{
-                if (((board[*pos + i] >= 'A' && (board[*pos + i] <= 'Z')) || (board[*pos + i] == '\n')))
+            if (piece[n] == '#')
+            {
+                if (board[*pos + i] >= 'A' && board[*pos + i] <= 'Z')
                 {
+                    i = 0;
+                    n = 0;
                     *pos += 1;
-                    i = 0;  
                 }
                 else
                 {
                     i++;
-                    n++;
                 }
-                
-                
             }
-            else if (piece[n] == '\n' && (n += 1))
-                i += size;
-            else if (n == len - 1)
-                return (TRUE);
-            else if (piece[n] == '.')
+            if (piece[n] == '\n')
             {
-                i++;
-                 n++;
+                i += size;
             }
-           
+            n++;
         }
-
-    }
+        if (n == len)
+        return (TRUE);
+    
     return (FALSE);
 }
 
