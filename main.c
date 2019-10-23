@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 12:19:27 by asultanb          #+#    #+#             */
-/*   Updated: 2019/10/22 19:32:34 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/22 22:33:24 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,10 @@ int		main(int argc, char **argv)
 			return (1);
 		board->size = 2; //ft_sqrt(size);
 		board->value = new_board(board->size);
-		printf("board:\n%s\n", board->value);
 		while (solver(&pieces_arr, board, pieces, 0) == FALSE)
 		{
 			free(board->value);
 			board->value = new_board(++board->size);
-			printf("new board:\n%s\n", board->value);
 		}
 		print_board(board->value, board->size);
 	}
