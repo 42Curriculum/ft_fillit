@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 12:19:27 by asultanb          #+#    #+#             */
-/*   Updated: 2019/10/22 19:28:46 by asultanb         ###   ########.fr       */
+/*   Updated: 2019/10/22 19:32:34 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		main(int argc, char **argv)
 			board->value = new_board(++board->size);
 			printf("new board:\n%s\n", board->value);
 		}
-		print_board(board->value);
+		print_board(board->value, board->size);
 	}
 	else
 		ft_putendl("usage: fillit wrong number of arguments");
