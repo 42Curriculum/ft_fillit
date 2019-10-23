@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 19:55:17 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/22 10:35:13 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/22 19:09:44 by asultanb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,13 @@ char *new_board(int size)
     int i;
     char *str;
     
-    i = 1;
-    str = ft_strnew(size*size + size);
-    while (i <= (size*size + size + 1)) 
+    i = 0;
+    str = ft_strnew(size*size);
+    while (i < size * size) 
     {
-        str[i - 1] = '.';
+        str[i] = '.';
         i++;
-        if ((i % (size + 1) == 0 && i > 0))
-        {   str[i - 1] = '\n';
-            i++;
-        }
     }
-    str[i - 2] = '\0';
     return (str);
 }
 
@@ -42,4 +37,18 @@ int p_count(int *str)
         i++;
     }
     return (i);
+}
+
+void print_board(char *board, int size)
+{
+    int i ;
+
+    i = 0;
+    while (board[i])
+    {
+        if (i%size == 0)
+            ft_putchar('\n');
+        ft_putchar(board[i]);
+        i++; 
+    }
 }

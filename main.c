@@ -6,12 +6,12 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 12:19:27 by asultanb          #+#    #+#             */
-/*   Updated: 2019/10/22 10:58:59 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/22 19:26:44 by asultanb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
+		
 int		main(int argc, char **argv)
 {
 	t_board	*board;
@@ -29,14 +29,16 @@ int		main(int argc, char **argv)
 		fd = open(argv[1], O_RDONLY);
 		if (!(size = read_file(fd, pieces, &pieces_arr)))
 			return (1);
-		board->size = 4;
+		board->size = 2; //ft_sqrt(size);
 		board->value = new_board(board->size);
+		printf("board:\n%s\n", board->value);
 		while (solver(&pieces_arr, board, pieces, 0) == FALSE)
 		{
 			free(board->value);
 			board->value = new_board(++board->size);
+			printf("new board:\n%s\n", board->value);
 		}
-		ft_putstr(board->value);
+		print_board(board->value);
 	}
 	else
 		ft_putendl("usage: fillit wrong number of arguments");

@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 13:46:17 by jjosePhi          #+#    #+#             */
-/*   Updated: 2019/10/22 10:33:54 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/22 19:11:20 by asultanb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct		s_board
 char	*new_board(int size);
 int		solver(int (*pieces_arr)[], t_board *board, char *m_pieces[], int i);
 int		read_file(int fd, char **p_array, int (*pieces_arr)[]);
-int p_count(int *str);
+int		p_count(int *str);
+void	print_board(char *board, int size);
 
 #endif

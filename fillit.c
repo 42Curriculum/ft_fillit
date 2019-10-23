@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 13:42:10 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/21 18:25:07 by asultanb         ###   ########.fr       */
+/*   Updated: 2019/10/22 18:44:08 by asultanb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	get_piece(char *input, char **p_array, int (*pieces_arr)[], int *size)
 	{
 		if (make_piece(input, p_array[i], 0, 0))
 		{
-			*size += ((i < 3) ? 4 : 6);
+			*size += 4;
 			while ((*pieces_arr)[k] >= 0)
 				k++;
 			(*pieces_arr)[k] = i;

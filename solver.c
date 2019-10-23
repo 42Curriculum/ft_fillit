@@ -6,14 +6,14 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 14:29:54 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/22 13:28:49 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/22 19:26:32 by asultanb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include <stdio.h>
 
-void make_board(char *piece, t_board **board, int pos, int index)//This works I think
+void put_piece(char *piece, t_board **board, int pos, int index)//This works I think
 {
     int i;
     int n;
@@ -24,7 +24,7 @@ void make_board(char *piece, t_board **board, int pos, int index)//This works I 
     {
 		if (piece[n] == '\n')
 		{
-			pos += (*board)->size + 1;
+			pos += (*board)->size;
 			i = 0;
 		}
 		else if (piece[n] == '#')
@@ -45,6 +45,36 @@ int findspot(char *piece, char *board, int *pos, int size)//Works ''fin'e, but n
     int len;
 
     len = ft_strlen(piece);
+	printf("piece:\n%s\n", piece);
+	while (board[*pos])
+	{
+		i = 0;
+		n = 0;
+		while (piece[n] && board[*pos + i])
+		{
+			if (piece[n] == '#')
+			{
+				if (board[*pos + i] >= 'A' && board[*pos + i] <= 'Z')
+					break;
+				i++;
+			}
+			else if (piece[n] == '.' && (board[*pos + i] >= 'A' && board[*pos + i] <= 'Z'))
+				i++;
+			else if (piece[n] == '\n')
+				i = *pos + size;
+			n++;
+			if (n == len)
+			{
+				printf("position: %i, len: %i, n: %i\n", *pos, len, n);
+				return (TRUE);
+			}
+		}
+		*pos += 1;
+	}
+	return (FALSE);
+}
+
+	/*
     while (board[*pos])
     {
         i = 0;
@@ -56,19 +86,21 @@ int findspot(char *piece, char *board, int *pos, int size)//Works ''fin'e, but n
 				break ;
             else if (piece[n] == '.' && ((board[*pos + i] >= 'A' && 
 					(board[*pos + i] <= 'Z'))))
-                n++;
+				i++;
             else if (piece[n] == '\n')
                 i += size;
             else if (n == len - 1)
+			{
+				printf("string: \n%s \nposition: %i\n", piece, *pos);
                 return (TRUE);
+			}
             else if (piece[n] == '#')
                 i++;
             n++;
         }
         *pos += 1;
     }
-    return (FALSE);
-}
+	*/
 
 void clear_board(t_board **board, int index)//This works I think
 {
@@ -79,9 +111,7 @@ void clear_board(t_board **board, int index)//This works I think
     {
 
 		if ((*board)->value[i] == 'A' + index)
-        {
 			(*board)->value[i] = '.';
-        }
         i++;
     }
 }
@@ -95,7 +125,7 @@ int solver(int (*pieces_arr)[], t_board *board, char *m_pieces[], int i)
         return (FALSE);
     else
     {
-        make_board(m_pieces[(*pieces_arr)[i]], &board, pos, i);
+        put_piece(m_pieces[(*pieces_arr)[i]], &board, pos, i);
         if (i == 25 || (*pieces_arr)[i + 1] == -1)
             return (TRUE);
         else
@@ -108,7 +138,7 @@ int solver(int (*pieces_arr)[], t_board *board, char *m_pieces[], int i)
                 else
                 {
                     clear_board(&board, i);
-                    make_board(m_pieces[(*pieces_arr)[i]], &board, pos, i);
+                    put_piece(m_pieces[(*pieces_arr)[i]], &board, pos, i);
                     if (i == 25 || (*pieces_arr)[i + 1] == -1)
                         return (TRUE);
                 }
