@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 14:29:54 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/23 11:49:52 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/23 17:30:08 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,33 +47,37 @@ int findspot(char *piece, char *board, int *pos, int size)//Works ''fin'e, but n
 
     mult  = 1;
     len = ft_strlen(piece);
+  
     i = 0;
     n = 0;
- 
-        while (board[*pos + i] && piece[n])
-        {
-            if (piece[n] == '#')
-            {
-                if ((board[*pos + i] >= 'A' && board[*pos + i] <= 'Z') || (i > 0  && (i % size == 0)))
-                {
-                    i = 0;
-                    n = 0;
-                    *pos += 1;
-                }
-                else
-                    i++;
-            }
-            else if (piece[n] == '\n')
-            {
-                i = (*pos + 1) + size * mult;
-                mult++;
-            }
-            n++;
-        }
-        if (n == len)
-            return (TRUE);
 
-    
+    while (board[*pos + i] && piece[n])
+    {
+        if (piece[n] == '\n')
+        {
+           i = (*pos + 1) + size * mult;
+            mult++;
+        }
+        else if (piece[n] == '#')
+        {
+            if ((i > 0  && (i % size == 0)) && piece[n + 1] == '#')
+            {
+              break ;   
+            }
+            if ((board[*pos + i] >= 'A' && board[*pos + i] <= 'Z'))
+            {
+                i = 0;
+                n = 0;
+                *pos += 1;
+                n = -1;
+            }
+            else
+                i++;
+        }
+        n++;
+    }
+    if (n == len)
+        return (TRUE);
     return (FALSE);
 }
 
@@ -98,7 +102,7 @@ int solver(int (*pieces_arr)[], t_board *board, char *m_pieces[], int i)
     int pos;
 
     pos = 0;
-    if (!(findspot(m_pieces[(*pieces_arr)[i]], board->value, &pos, board->size)))
+    if (!(solver_1(board->value, &pos, board->size)))
         return (FALSE);
     else
     {
@@ -111,7 +115,7 @@ int solver(int (*pieces_arr)[], t_board *board, char *m_pieces[], int i)
             while (!(solver(pieces_arr, board, m_pieces, i + 1)))
             {
                 pos = 0;
-                if(!(findspot(m_pieces[(*pieces_arr)[i]], board->value, &pos, board->size)))
+                if(!(solver_1(board->value, &pos, board->size)))
                     return (FALSE);
                 else
                 {
