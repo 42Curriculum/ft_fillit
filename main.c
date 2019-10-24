@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 12:19:27 by asultanb          #+#    #+#             */
-/*   Updated: 2019/10/22 22:33:24 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/23 18:19:28 by asultanb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		main(int argc, char **argv)
 		fd = open(argv[1], O_RDONLY);
 		if (!(size = read_file(fd, pieces, &pieces_arr)))
 			return (1);
-		board->size = 2; //ft_sqrt(size);
+		board->size = 3; //ft_sqrt(size);
 		board->value = new_board(board->size);
 		while (solver(&pieces_arr, board, pieces, 0) == FALSE)
 		{

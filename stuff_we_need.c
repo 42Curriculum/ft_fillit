@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 19:55:17 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/22 19:30:40 by asultanb         ###   ########.fr       */
+/*   Updated: 2019/10/23 18:58:39 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ char *new_board(int size)
         str[i] = '.';
         i++;
     }
+    str[i] = '\0';
     return (str);
 }
 
