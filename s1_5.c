@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 16:12:08 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/24 12:35:57 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/24 13:40:04 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int f_2(char *board, int *pos,  int size)//##\n##
 		return (TRUE);
 	return (FALSE);
 }
-int f_3(char *board, int *pos,  int size)
+int f_3(char *board, int *pos,  int size)//####
 {
 	int i;
 	
@@ -78,7 +78,7 @@ int f_3(char *board, int *pos,  int size)
 		return (TRUE);
 	return (FALSE);
 }
-int f_4(char *board, int *pos,  int size)
+int f_4(char *board, int *pos,  int size)//.#\n##\n#.
 {
 	int i;
 
@@ -91,8 +91,14 @@ int f_4(char *board, int *pos,  int size)
 			*pos += 1;
 			i = 0;
 		}
-		if ( i == 1 || i == (*pos + size + 1))
-			i += size - 1;
+		if ((i == 1 || i == (*pos + size + 1)))
+		{
+			if (i += size - 1 && (board[*pos + i] >= 'A' && board[*pos + i] <= 'Z'))
+			{
+				*pos += 1;
+				i = 0;
+			}
+		}
 		else if (i == (*pos + size*2))
 			return (TRUE);
 		else 
@@ -102,23 +108,27 @@ int f_4(char *board, int *pos,  int size)
 		return (TRUE);
 	return (FALSE);
 }
-int f_5(char *board, int *pos,  int size)
+int f_5(char *board, int *pos,  int size)//#.\n##\n.#
 {
 	int i;
-	
+
 	i = 0;
-	while (board[*pos + i] && i < 4)
+	while (board[*pos + i])
 	{
 		
-		if ((board[*pos + i] >= 'A' && board[*pos + i] <= 'Z')
-		|| (i > 0  && (i % size == 0)))
+		if ((board[*pos + i] >= 'A' && board[*pos + i] <= 'Z'))
 		{
 			*pos += 1;
 			i = 0;
 		}
-		i++;
+		if ( i == 0 )
+			i += size;
+		else if (i == (*pos + size + 1))
+			i += (size);
+		else if (i == (*pos + (size * 2) + 1))
+			return (TRUE);
+		else 
+			i++;
 	}
-	if (i == 4)
-		return (TRUE);
 	return (FALSE);
 }
