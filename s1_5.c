@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 16:12:08 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/24 13:40:04 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/24 13:42:01 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,6 @@ int f_5(char *board, int *pos,  int size)//#.\n##\n.#
 	i = 0;
 	while (board[*pos + i])
 	{
-		
 		if ((board[*pos + i] >= 'A' && board[*pos + i] <= 'Z'))
 		{
 			*pos += 1;

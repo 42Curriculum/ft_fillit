@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 13:46:17 by jjosePhi          #+#    #+#             */
-/*   Updated: 2019/10/24 12:37:08 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/24 13:43:42 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,19 @@ int 	f_1(char *board, int *pos,  int size);
 int 	f_2(char *board, int *pos,  int size);
 int 	f_3(char *board, int *pos,  int size);
 int 	f_4(char *board, int *pos,  int size);
-int 	f_5(char *board, int *pos,  int size);
+int 	f_6(char *board, int *pos,  int size);
+int 	f_7(char *board, int *pos,  int size);
+int 	f_8(char *board, int *pos,  int size);
+int 	f_9(char *board, int *pos,  int size);
+int 	f_10(char *board, int *pos,  int size);
+int 	f_11(char *board, int *pos,  int size);
+int 	f_12(char *board, int *pos,  int size);
+int 	f_13(char *board, int *pos,  int size);
+int 	f_14(char *board, int *pos,  int size);
+int 	f_15(char *board, int *pos,  int size);
+int 	f_16(char *board, int *pos,  int size);
+int 	f_17(char *board, int *pos,  int size);
+int 	f_18(char *board, int *pos,  int size);
+int 	f_19(char *board, int *pos,  int size);
 
 #endif
