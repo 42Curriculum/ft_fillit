@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 14:29:54 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/23 20:21:50 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/24 12:34:46 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int solver(int (*pieces_arr)[], t_board *board, char *m_pieces[], int i)
     int pos;
 
     pos = 0;
-    if(!(f_2(board->value, &pos, board->size)))
+    if(!(f_3(board->value, &pos, board->size)))
         return (FALSE);
     else
     {
@@ -118,7 +118,7 @@ int solver(int (*pieces_arr)[], t_board *board, char *m_pieces[], int i)
             {
 				clear_board(&board);
                 pos += 1;
-                if(!(f_2(board->value, &pos, board->size)))
+                if(!(f_3(board->value, &pos, board->size)))
                     return (FALSE);
                 else
                 {

@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 16:12:08 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/24 11:20:14 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/24 12:35:57 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,7 @@ int f_3(char *board, int *pos,  int size)
 	while (board[*pos + i] && i < 4)
 	{
 		
-		if ((board[*pos + i] >= 'A' && board[*pos + i] <= 'Z')
-		|| (i > 0  && (i % size == 0)))
+		if ((board[*pos + i] >= 'A' && board[*pos + i] <= 'Z')|| (i > 0  && (i % size == 0)))
 		{
 			*pos += 1;
 			i = 0;
@@ -82,18 +81,22 @@ int f_3(char *board, int *pos,  int size)
 int f_4(char *board, int *pos,  int size)
 {
 	int i;
-	
-	i = 0;
+
+	i = 1;
 	while (board[*pos + i] && i < 4)
 	{
 		
-		if ((board[*pos + i] >= 'A' && board[*pos + i] <= 'Z')
-		|| (i > 0  && (i % size == 0)))
+		if ((board[*pos + i] >= 'A' && board[*pos + i] <= 'Z'))
 		{
 			*pos += 1;
 			i = 0;
 		}
-		i++;
+		if ( i == 1 || i == (*pos + size + 1))
+			i += size - 1;
+		else if (i == (*pos + size*2))
+			return (TRUE);
+		else 
+			i++;
 	}
 	if (i == 4)
 		return (TRUE);
