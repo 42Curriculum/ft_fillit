@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 14:29:54 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/24 13:44:16 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/24 20:45:31 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int findspot(char *piece, char *board, int *pos, int size)//Works ''fin'e, but n
 					break;
 				i++;
 			}
-			else if (piece[n] == '.' && (board[*pos + i] >= 'A' && board[*pos + i] <= 'Z'))
+			else if (piece[n] == '.')
 					i++;
 			else if (piece[n] == '\n')
 				i = size * mult++;
@@ -105,7 +105,7 @@ int solver(int (*pieces_arr)[], t_board *board, char *m_pieces[], int i)
     int pos;
 
     pos = 0;
-    if(!(f_6(board->value, &pos, board->size)))
+    if(!(findspot(m_pieces[(*pieces_arr)[i]], board->value, &pos, board->size)))
         return (FALSE);
     else
     {
@@ -118,7 +118,7 @@ int solver(int (*pieces_arr)[], t_board *board, char *m_pieces[], int i)
             {
 				clear_board(&board);
                 pos += 1;
-                if(!(f_6(board->value, &pos, board->size)))
+                if(!(findspot(m_pieces[(*pieces_arr)[i]], board->value, &pos, board->size)))
                     return (FALSE);
                 else
                 {
