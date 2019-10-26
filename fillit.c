@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 13:42:10 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/22 18:44:08 by asultanb         ###   ########.fr       */
+/*   Updated: 2019/10/25 19:48:51 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,11 @@ int	read_file(int fd, char **p_array, int (*pieces_arr)[])
 	char	*input;
 	int		ln;
 	int		size;
+	int		pn;
 
 	size = 0;
 	ln = 0;
+	pn = 0;
 	input = ft_strnew(0);
 	line = ft_strnew(0);
 	while (get_next_line(fd, &line))
@@ -119,11 +121,18 @@ int	read_file(int fd, char **p_array, int (*pieces_arr)[])
 			free(input);
 			input = ft_strnew(0);
 			free(line);
+			pn++;
 		}
+		else if (ft_strlen(line) != 4)
+			return (0);
 		ln++;		
 	}
 	if (ft_strlen(input) == 20 && ln == 4)
-		if (!(get_piece(input, p_array, pieces_arr, &size)))
+	{
+		if (!(get_piece(input, p_array, pieces_arr, &size) && (++pn)))
 			return (0);
-	return (size);
+	}
+	if (ln != 4)
+		return (0);
+	return ((pn == 1) ? 2 : size/pn);
 }
