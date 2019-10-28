@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 13:46:17 by jjosePhi          #+#    #+#             */
-/*   Updated: 2019/10/25 15:44:47 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/27 21:22:02 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,29 +44,14 @@ typedef struct		s_board
 	char			*value;
 }					t_board;
 
-char	*new_board(int size);
-int		solver(int (*pieces_arr)[], t_board *board, char *m_pieces[], int i);
-int		read_file(int fd, char **p_array, int (*pieces_arr)[]);
-int		p_count(int *str);
-void	print_board(char *board, int size);
-int		err_display();
-int 	f_1(char *board, int *pos,  int size);
-int 	f_2(char *board, int *pos,  int size);
-int 	f_3(char *board, int *pos,  int size);
-int 	f_4(char *board, int *pos,  int size);
-int 	f_6(char *board, int *pos,  int size);
-int 	f_7(char *board, int *pos,  int size);
-int 	f_8(char *board, int *pos,  int size);
-int 	f_9(char *board, int *pos,  int size);
-int 	f_10(char *board, int *pos,  int size);
-int 	f_11(char *board, int *pos,  int size);
-int 	f_12(char *board, int *pos,  int size);
-int 	f_13(char *board, int *pos,  int size);
-int 	f_14(char *board, int *pos,  int size);
-int 	f_15(char *board, int *pos,  int size);
-int 	f_16(char *board, int *pos,  int size);
-int 	f_17(char *board, int *pos,  int size);
-int 	f_18(char *board, int *pos,  int size);
-int 	f_19(char *board, int *pos,  int size);
+char				*new_board(int size, t_board **b);
+int					solver(int (*p)[], t_board *b, char *m[], int i);
+int					read_file(int fd, char **p, int (*pa)[], int size);
+int					p_count(int *str);
+void				print_n_free(t_board **b);
+char				*ft_strfjoin(char **s1, char const *s2);
+int					err_display();
+int					free_n_alloc(int flag, char **input, char **line, int *pn);
+int		if_next_line(int pos, int i, int s, int m);
 
 #endif

@@ -10,7 +10,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "/nfs/2019/j/jjosephi/Documents/fillit/a.out",
-            "args": ["/nfs/2019/j/jjosephi/Documents/fillit/sample"],
+            "args": ["/nfs/2019/j/jjosephi/Documents/fillit/sample3"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],

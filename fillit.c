@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 13:42:10 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/25 19:48:51 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/27 20:58:30 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	check_row(char *mpiece, int i)
 	int	mod_i;
 
 	mod_i = 1;
-	while (mpiece[i + mod_i] != '\n' && i + mod_i <= 18)
+	while (mpiece[i + mod_i] != '\n' && i + mod_i <= 18 )
 	{
 		if (mpiece[i + mod_i] == '#')
 			return (TRUE);
@@ -37,12 +37,19 @@ int	check_col(char *mpiece, int i)
 {
 	int mod_i;
 
-	mod_i = i % 5;
-	while (mod_i < 18)
+	mod_i = i;
+	while (mod_i <= 19)
 	{
 		if (mpiece[mod_i] == '#')
 			return (TRUE);
 		mod_i += 5;
+	}
+	mod_i = i;
+	while (mod_i >= 0)
+	{
+		if (mpiece[mod_i] == '#')
+			return (TRUE);
+		mod_i -= 5;
 	}
 	return (FALSE);
 }
@@ -97,42 +104,31 @@ int	get_piece(char *input, char **p_array, int (*pieces_arr)[], int *size)
 	return (0);
 }
 
-int	read_file(int fd, char **p_array, int (*pieces_arr)[])
+int	read_file(int fd, char **p_array, int (*pieces_arr)[], int size)
 {
 	char	*line;
 	char	*input;
 	int		ln;
-	int		size;
 	int		pn;
 
-	size = 0;
-	ln = 0;
-	pn = 0;
-	input = ft_strnew(0);
-	line = ft_strnew(0);
-	while (get_next_line(fd, &line))
+	ln = 1;
+	pn = free_n_alloc(0, &input, &line, &pn);
+	while (get_next_line(fd, &line) && (++ln))
 	{
-		input = ft_strjoin(input, ft_strjoin(line, "\n"));
-		if (ft_strlen(line) == 0 && ln == 4)
+		input = ft_strfjoin(&input, line);
+		if (ft_strlen(line) == 0 && ln == 6 && (ln = 1))
 		{
-			ln = -1;
 			if (!(get_piece(input, p_array, pieces_arr, &size)))
 				return (0);
-			free(input);
-			input = ft_strnew(0);
-			free(line);
-			pn++;
+			free_n_alloc(1, &input, &line, &pn);
 		}
 		else if (ft_strlen(line) != 4)
 			return (0);
-		ln++;		
 	}
-	if (ft_strlen(input) == 20 && ln == 4)
-	{
+	if (ft_strlen(input) == 20 && ln == 5 && (free_n_alloc(2, &input, &line, &pn)))
 		if (!(get_piece(input, p_array, pieces_arr, &size) && (++pn)))
 			return (0);
-	}
-	if (ln != 4)
+	if (ln != 5)
 		return (0);
-	return ((pn == 1) ? 2 : size/pn);
+	return ((pn == 1) ? 2 : size / pn);
 }
