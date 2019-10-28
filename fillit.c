@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 13:42:10 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/27 20:58:30 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/27 23:29:41 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	check_row(char *mpiece, int i)
 	int	mod_i;
 
 	mod_i = 1;
-	while (mpiece[i + mod_i] != '\n' && i + mod_i <= 18 )
+	while (mpiece[i + mod_i] != '\n' && i + mod_i <= 18)
 	{
 		if (mpiece[i + mod_i] == '#')
 			return (TRUE);
@@ -112,7 +112,7 @@ int	read_file(int fd, char **p_array, int (*pieces_arr)[], int size)
 	int		pn;
 
 	ln = 1;
-	pn = free_n_alloc(0, &input, &line, &pn);
+	pn = falloc(0, &input, &line, &pn);
 	while (get_next_line(fd, &line) && (++ln))
 	{
 		input = ft_strfjoin(&input, line);
@@ -120,12 +120,12 @@ int	read_file(int fd, char **p_array, int (*pieces_arr)[], int size)
 		{
 			if (!(get_piece(input, p_array, pieces_arr, &size)))
 				return (0);
-			free_n_alloc(1, &input, &line, &pn);
+			falloc(1, &input, &line, &pn);
 		}
 		else if (ft_strlen(line) != 4)
 			return (0);
 	}
-	if (ft_strlen(input) == 20 && ln == 5 && (free_n_alloc(2, &input, &line, &pn)))
+	if (ft_strlen(input) == 20 && ln == 5 && (falloc(2, &input, &line, &pn)))
 		if (!(get_piece(input, p_array, pieces_arr, &size) && (++pn)))
 			return (0);
 	if (ln != 5)

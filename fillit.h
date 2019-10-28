@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 13:46:17 by jjosePhi          #+#    #+#             */
-/*   Updated: 2019/10/27 21:22:02 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/27 23:09:25 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int					p_count(int *str);
 void				print_n_free(t_board **b);
 char				*ft_strfjoin(char **s1, char const *s2);
 int					err_display();
-int					free_n_alloc(int flag, char **input, char **line, int *pn);
-int		if_next_line(int pos, int i, int s, int m);
+int					falloc(int flag, char **input, char **line, int *pn);
+int					if_next_line(int pos, int i, int s, int m);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 14:29:54 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/27 21:36:07 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/28 11:00:22 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,7 @@ int		findspot(char *p, char *board, int *po, int s)
 					break ;
 			if (p[n] == '\n')
 				i = s * m++;
-			if (p[n] == '.')
-				i++;
+			(p[n] == '.') ? i++ : (i += 0);
 			n++;
 			if (n == (int)ft_strlen(p))
 				return (TRUE);

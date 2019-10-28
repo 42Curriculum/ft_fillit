@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 19:55:17 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/27 14:02:08 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/28 11:01:25 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*new_board(int size, t_board **b)
 	i = 0;
 	free((*b)->value);
 	str = ft_strnew(size * size);
-	while (i < size* size)
+	while (i < size * size)
 	{
 		str[i] = '.';
 		i++;
@@ -57,7 +57,7 @@ void	print_n_free(t_board **b)
 	free(*b);
 }
 
-int		free_n_alloc(int flag, char **input, char **line, int *pn)
+int		falloc(int flag, char **input, char **line, int *pn)
 {
 	if (flag == 1)
 	{
@@ -86,9 +86,8 @@ char	*ft_strfjoin(char **s1, char const *s2)
 {
 	size_t	len;
 	char	*str;
-	char *temp;
+	char	*temp;
 
-	
 	if (!s1 || !s2)
 		return (NULL);
 	len = ft_strlen(*s1) + ft_strlen(s2) + 1;
@@ -99,6 +98,6 @@ char	*ft_strfjoin(char **s1, char const *s2)
 	str = ft_strcat(str, s2);
 	temp = str;
 	str = ft_strjoin(str, "\n");
-	free (temp);
+	free(temp);
 	return (str);
 }
