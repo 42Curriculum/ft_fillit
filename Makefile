@@ -1,20 +1,33 @@
-NAME = fillit
-FILES = ./srcs/fillit.c ./srcs/solver.c ./srcs/stuff_we_need.c ./srcs/main.c libft/libft.a ./srcs/check_piece.c
-FLAGS = -Wall -Wextra -Werror -o
-INCL = ./incl/fillit.h
+NAME 		:=	fillit
+
+F_N			:=	fillit solver main stuff_we_need check_piece
+FILES		:=	$(addprefix srcs/, $(addsuffix .c, $(F_N)))
+OBJS		:=	$(addprefix objects/, $(addsuffix .o, $(F_N)))	
+
+FLAGS		:= -Wall -Wextra -Werror
+INCL		:= -I incl/ -I libft/
+
+LIB 		:= libft
+LIB_LINK	:= -L $(LIB) -l ft
+
+.PHONY: all clean fclean re
 
 all : $(NAME)
 
-$(NAME) :
-	make -C libft/
-	gcc $(FLAGS) $(NAME) $(FILES) -I $(INCL) -L. libft/libft.a
+objects/%.o: srcs/%.c
+	@/bin/mkdir -p objects
+	@gcc $(FLAGS) -c $(INCL) $< -o $@
+
+$(NAME) : $(OBJS)
+	@make -C $(LIB)
+	@gcc $(LIB_LINK) $(OBJS) -o $(NAME)
 
 clean :
-	/bin/rm -f *.o
-	make -C libft/ clean
+	@/bin/rm -rf objects
+	@make -C libft clean
 
 fclean : clean
-	/bin/rm -f $(NAME)
-	make -C libft/ fclean
+	@/bin/rm -f $(NAME)
+	@make -C libft fclean
 
 re : fclean all
