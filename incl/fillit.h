@@ -6,17 +6,17 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 13:46:17 by jjosePhi          #+#    #+#             */
-/*   Updated: 2019/10/28 20:28:27 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/28 20:50:39 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLIT_H
 # define FILLIT_H
 
-# include "./libft/libft.h"
-# include <stdio.h>
+# include "../libft/libft.h"
+# include <stdlib.h>
 # include <unistd.h>
-# include "./libft/get_next_line.h"
+# include "../libft/get_next_line.h"
 # include <fcntl.h>
 # define P1 "#\n#\n#\n#"
 # define P2 "##\n##"

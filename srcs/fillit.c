@@ -6,11 +6,11 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 13:42:10 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/28 20:32:30 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/28 20:45:34 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "../incl/fillit.h"
 
 static int	check_row(char *mpiece, int i)
 {

@@ -6,11 +6,11 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 21:13:50 by asultanb          #+#    #+#             */
-/*   Updated: 2019/10/28 20:23:42 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/28 20:44:45 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "../incl/fillit.h"
 
 static void		dfs_checker(int arr[4][4], int row, int col)
 {
