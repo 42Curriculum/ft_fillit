@@ -6,11 +6,11 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 12:19:27 by asultanb          #+#    #+#             */
-/*   Updated: 2019/10/28 20:45:20 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/29 16:10:23 by asultanb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incl/fillit.h"
+#include "fillit.h"
 
 int				err_display(void)
 {

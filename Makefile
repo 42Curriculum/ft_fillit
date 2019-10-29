@@ -1,11 +1,11 @@
 NAME 		:=	fillit
 
 F_N			:=	fillit solver main stuff_we_need check_piece
-FILES		:=	$(addprefix srcs/, $(addsuffix .c, $(F_N)))
+FILES		:=	$(addprefix fillit_srcs/, $(addsuffix .c, $(F_N)))
 OBJS		:=	$(addprefix objects/, $(addsuffix .o, $(F_N)))	
 
 FLAGS		:= -Wall -Wextra -Werror
-INCL		:= -I incl/ -I libft/
+INCL		:= -I fillit_srcs/ -I libft/
 
 LIB 		:= libft
 LIB_LINK	:= -L $(LIB) -l ft
@@ -14,7 +14,7 @@ LIB_LINK	:= -L $(LIB) -l ft
 
 all : $(NAME)
 
-objects/%.o: srcs/%.c
+objects/%.o: fillit_srcs/%.c
 	@/bin/mkdir -p objects
 	@gcc $(FLAGS) -c $(INCL) $< -o $@
 

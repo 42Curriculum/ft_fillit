@@ -6,11 +6,11 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 19:55:17 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/29 13:20:20 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/29 16:11:23 by asultanb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incl/fillit.h"
+#include "fillit.h"
 
 char	*new_board(int size, t_board **b)
 {

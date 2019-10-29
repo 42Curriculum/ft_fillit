@@ -6,11 +6,11 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 14:29:54 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/28 20:45:09 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/29 16:11:13 by asultanb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incl/fillit.h"
+#include "fillit.h"
 
 int			if_next_line(int pos, int i, int s, int m)
 {
