@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 13:42:10 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/29 15:54:54 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/29 13:27:55 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ int			read_file(int fd, char **p_array, int (*pieces_arr)[], int size)
 				return (0);
 			falloc(1, &input, &line, &pn);
 		}
-		else if (ft_strlen(line) != 4 && (falloc(2, &input, &line, &pn)))
+		else if (ft_strlen(line) != 4)
 			return (0);
 	}
 	if (ft_strlen(input) == 20 && ln == 5 && (falloc(2, &input, &line, &pn)))

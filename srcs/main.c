@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 12:19:27 by asultanb          #+#    #+#             */
-/*   Updated: 2019/10/28 21:00:53 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/28 20:45:20 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,6 @@ int				main(int argc, char **argv)
 		while (solver(&pieces_arr, board, pieces, 0) == FALSE)
 			board->value = new_board(++board->size, &board);
 		print_n_free(&board);
-		while (1)
-		;
 	}
 	else
 		ft_putendl("usage: fillit wrong number of arguments");
