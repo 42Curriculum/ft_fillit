@@ -6,7 +6,7 @@
 #    By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/16 12:29:56 by jjosephi          #+#    #+#              #
-#    Updated: 2019/10/02 11:16:22 by jjosephi         ###   ########.fr        #
+#    Updated: 2019/10/28 20:16:05 by jjosephi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = libft.a
 FLAGS = -Wall -Wextra -Werror
 
 $(NAME) :
-	gcc -c $(FLAGS) *.c libft.h
+	gcc -c $(FLAGS) *.c libft.h get_next_line.h
 	ar rc libft.a *.o
 
 all : $(NAME)

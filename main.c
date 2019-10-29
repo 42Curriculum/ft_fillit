@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 12:19:27 by asultanb          #+#    #+#             */
-/*   Updated: 2019/10/27 23:13:06 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/28 20:25:09 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int				err_display(void)
 	return (0);
 }
 
-int				check_file(int fd)
+static int		check_file(int fd)
 {
 	int		b;
 	char	buffer[141];
@@ -30,11 +30,11 @@ int				check_file(int fd)
 	close(fd);
 	b = ft_strlen(buffer);
 	if (b > 4 && buffer[b - 1] == '\n')
-		return (FALSE);
-	return (TRUE);
+		return (TRUE);
+	return (FALSE);
 }
 
-static	t_board	*var_init(char *pieces[])
+static t_board	*var_init(char *pieces[])
 {
 	t_board *board;
 
@@ -79,7 +79,7 @@ int				main(int argc, char **argv)
 		fd = open(argv[1], O_RDONLY);
 		if (!(size = read_file(fd, pieces, &pieces_arr, 0)))
 			return (err_display() && close(fd));
-		board->size = size;
+		board->size = size - 1;
 		board->value = new_board(board->size, &board);
 		while (solver(&pieces_arr, board, pieces, 0) == FALSE)
 			board->value = new_board(++board->size, &board);

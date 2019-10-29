@@ -6,13 +6,13 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 13:42:10 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/27 23:29:41 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/28 20:32:30 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int	check_row(char *mpiece, int i)
+static int	check_row(char *mpiece, int i)
 {
 	int	mod_i;
 
@@ -33,7 +33,7 @@ int	check_row(char *mpiece, int i)
 	return (FALSE);
 }
 
-int	check_col(char *mpiece, int i)
+static int	check_col(char *mpiece, int i)
 {
 	int mod_i;
 
@@ -54,7 +54,7 @@ int	check_col(char *mpiece, int i)
 	return (FALSE);
 }
 
-int	make_piece(char *input, char *m_piece, int i, int n)
+static int	make_piece(char *input, char *m_piece, int i, int n)
 {
 	while (input[i])
 	{
@@ -82,7 +82,8 @@ int	make_piece(char *input, char *m_piece, int i, int n)
 	return (n == (int)ft_strlen(m_piece)) ? TRUE : FALSE;
 }
 
-int	get_piece(char *input, char **p_array, int (*pieces_arr)[], int *size)
+static int	get_piece(char *input, char **p_array, int (*pieces_arr)[],
+						int *size)
 {
 	int	i;
 	int k;
@@ -91,7 +92,7 @@ int	get_piece(char *input, char **p_array, int (*pieces_arr)[], int *size)
 	k = 0;
 	while (i < 19)
 	{
-		if (make_piece(input, p_array[i], 0, 0))
+		if (check_hashes(input) && make_piece(input, p_array[i], 0, 0))
 		{
 			*size += 4;
 			while ((*pieces_arr)[k] >= 0)
@@ -104,7 +105,7 @@ int	get_piece(char *input, char **p_array, int (*pieces_arr)[], int *size)
 	return (0);
 }
 
-int	read_file(int fd, char **p_array, int (*pieces_arr)[], int size)
+int			read_file(int fd, char **p_array, int (*pieces_arr)[], int size)
 {
 	char	*line;
 	char	*input;

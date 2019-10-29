@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 13:46:17 by jjosePhi          #+#    #+#             */
-/*   Updated: 2019/10/27 23:09:25 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/28 20:28:27 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "./libft/libft.h"
 # include <stdio.h>
 # include <unistd.h>
-# include "get_next_line.h"
+# include "./libft/get_next_line.h"
 # include <fcntl.h>
 # define P1 "#\n#\n#\n#"
 # define P2 "##\n##"
@@ -44,14 +44,16 @@ typedef struct		s_board
 	char			*value;
 }					t_board;
 
-char				*new_board(int size, t_board **b);
-int					solver(int (*p)[], t_board *b, char *m[], int i);
-int					read_file(int fd, char **p, int (*pa)[], int size);
-int					p_count(int *str);
-void				print_n_free(t_board **b);
-char				*ft_strfjoin(char **s1, char const *s2);
 int					err_display();
-int					falloc(int flag, char **input, char **line, int *pn);
+
+int					solver(int (*p)[], t_board *b, char *m[], int i);
 int					if_next_line(int pos, int i, int s, int m);
+int					read_file(int fd, char **p, int (*pa)[], int size);
+char				*ft_strfjoin(char **s1, char const *s2);
+int					falloc(int flag, char **input, char **line, int *pn);
+void				print_n_free(t_board **b);
+int					p_count(int *str);
+char				*new_board(int size, t_board **b);
+int					check_hashes(char *buff);
 
 #endif

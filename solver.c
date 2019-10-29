@@ -6,14 +6,14 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 14:29:54 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/28 13:27:44 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/28 20:30:38 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include <stdio.h>
 
-int		if_next_line(int pos, int i, int s, int m)
+int			if_next_line(int pos, int i, int s, int m)
 {
 	float resulta;
 	float a;
@@ -26,7 +26,7 @@ int		if_next_line(int pos, int i, int s, int m)
 		return (0);
 }
 
-int		put_piece(char *piece, t_board **board, int pos, int index)
+static int	put_piece(char *piece, t_board **board, int pos, int index)
 {
 	int i;
 	int n;
@@ -52,7 +52,7 @@ int		put_piece(char *piece, t_board **board, int pos, int index)
 	return (TRUE);
 }
 
-int		findspot(char *p, char *board, int *po, int s)
+static int	findspot(char *p, char *board, int *po, int s)
 {
 	int i;
 	int n;
@@ -62,7 +62,7 @@ int		findspot(char *p, char *board, int *po, int s)
 	{
 		n = 0;
 		m = 1;
-		while (p[n] && *po + i <= (s * s))
+		while (p[n] && (*po + i) < (s * s))
 		{
 			if (p[n] != '\n' && !if_next_line(*po, i, s, m))
 				break ;
@@ -81,7 +81,7 @@ int		findspot(char *p, char *board, int *po, int s)
 	return (FALSE);
 }
 
-void	clear_board(t_board **board)
+static void	clear_board(t_board **board)
 {
 	int		i;
 	char	max_letter;
@@ -103,7 +103,7 @@ void	clear_board(t_board **board)
 	}
 }
 
-int		solver(int (*p_a)[], t_board *board, char *mp[], int i)
+int			solver(int (*p_a)[], t_board *board, char *mp[], int i)
 {
 	int pos;
 
@@ -120,7 +120,7 @@ int		solver(int (*p_a)[], t_board *board, char *mp[], int i)
 			while (!(solver(p_a, board, mp, i + 1)))
 			{
 				clear_board(&board);
-				pos += 1;
+				pos++;
 				if (!(findspot(mp[(*p_a)[i]], board->value, &pos, board->size)))
 					return (FALSE);
 				else if (put_piece(mp[(*p_a)[i]], &board, pos, i))

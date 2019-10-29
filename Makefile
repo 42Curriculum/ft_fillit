@@ -1,13 +1,15 @@
 
 NAME = fillit
-FILES = fillit.c solver.c stuff_we_need.c get_next_line.c main.c libft/libft.a
-FLAGS = -Wall -Wextra -Werror
+FILES = fillit.c solver.c stuff_we_need.c main.c libft/libft.a check_piece.c
+FLAGS = -Wall -Wextra -Werror -g
 
-all :
+all : $(NAME)
+
+$(NAME) :
 	gcc $(FLAGS) $(FILES) -o $(NAME)
 
 clean :
-	/bin/rm -f fillit
+	/bin/rm -f *.o
 
 fclean : clean
 	/bin/rm -f fillit
