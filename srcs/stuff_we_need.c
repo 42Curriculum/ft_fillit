@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 19:55:17 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/29 13:20:20 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/10/29 15:54:58 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		falloc(int flag, char **input, char **line, int *pn)
 {
 	if (flag == 1)
 	{
-		free(*line);
+		// free(*line);
 		free(*input);
 		*input = ft_strnew(0);
 		*pn += 1;
@@ -70,11 +70,16 @@ int		falloc(int flag, char **input, char **line, int *pn)
 	else if (flag == 0)
 	{
 		*input = ft_strnew(0);
-		*line = ft_strnew(0);
+		//*line = ft_strnew(0);
 		*pn = 0;
 		return (0);
 	}
-	else
+	else if (flag == -1)
+	{
+		free (*line);
+		return (1);
+	}
+	else 
 	{
 		free(*line);
 		free(*input);
