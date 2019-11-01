@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 14:29:54 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/29 16:11:13 by asultanb         ###   ########.fr       */
+/*   Updated: 2019/11/01 16:31:45 by asultanb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,28 +78,6 @@ static int	findspot(char *p, char *board, int *po, int s)
 		*po += 1;
 	}
 	return (FALSE);
-}
-
-static void	clear_board(t_board **board)
-{
-	int		i;
-	char	max_letter;
-
-	i = 0;
-	max_letter = '.';
-	while ((*board)->value[i])
-	{
-		if ((*board)->value[i] > max_letter)
-			max_letter = (*board)->value[i];
-		i++;
-	}
-	i = 0;
-	while ((*board)->value[i])
-	{
-		if ((*board)->value[i] == max_letter)
-			(*board)->value[i] = '.';
-		i++;
-	}
 }
 
 int			solver(int (*p_a)[], t_board *board, char *mp[], int i)

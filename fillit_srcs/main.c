@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 12:19:27 by asultanb          #+#    #+#             */
-/*   Updated: 2019/10/31 12:03:36 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/11/01 16:34:51 by asultanb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,8 @@
 
 int				err_display(void)
 {
-	write(1, "error", 5);
-	return (0);
-}
-
-static int		check_file(int fd, char *arg)
-{
-	int		b;
-	char	buffer[141];
-	
-	close (fd);
-	fd = open(arg, O_RDONLY);
-	while ((b = read(fd, buffer, 140)))
-	{
-		buffer[b] = '\0';
-	}
-	close(fd);
-	b = ft_strlen(buffer);
-	if (b > 4 && buffer[b - 1] == '\n' && b <= 130)
-		return (TRUE);
-	return (FALSE);
+	write(1, "error\n", 6);
+	exit(1);
 }
 
 static t_board	*var_init(char *pieces[])
@@ -75,10 +57,10 @@ int				main(int argc, char **argv)
 	board = var_init(pieces);
 	if (argc == 2)
 	{
-		fd = open(argv[1], O_RDONLY | O_DIRECTORY);
-		if (fd >= 0 || check_file(fd, argv[1]) == 0)
+		if ((fd = open(argv[1], O_RDONLY | O_DIRECTORY)) >= 0 && close(fd))
 			return (err_display());
-		fd = open(argv[1], O_RDONLY);
+		if ((fd = open(argv[1], O_RDONLY)) <= 0)
+			return (err_display());
 		if (!(size = read_file(fd, pieces, &pieces_arr, 0)))
 			return (err_display() && close(fd));
 		board->size = size - 1;
@@ -88,6 +70,6 @@ int				main(int argc, char **argv)
 		print_n_free(&board);
 	}
 	else
-		ft_putendl("usage: fillit wrong number of arguments");
+		ft_putendl("usage: fillit input_file");
 	return (0);
 }

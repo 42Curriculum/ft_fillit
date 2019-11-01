@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 13:42:10 by jjosephi          #+#    #+#             */
-/*   Updated: 2019/10/29 16:10:45 by asultanb         ###   ########.fr       */
+/*   Updated: 2019/11/01 16:35:07 by asultanb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,29 +107,25 @@ static int	get_piece(char *input, char **p_array, int (*pieces_arr)[],
 
 int			read_file(int fd, char **p_array, int (*pieces_arr)[], int size)
 {
-	char	*line;
-	char	*input;
-	int		ln;
+	char	input[LINE_SIZE + 1];
+	int		ret;
 	int		pn;
 
-	ln = 1;
-	pn = falloc(0, &input, &line, &pn);
-	while (get_next_line(fd, &line) && (++ln))
+	pn = 0;
+	while ((ret = read(fd, input, LINE_SIZE)) == 21 && pn < 25)
 	{
-		input = ft_strfjoin(&input, line);
-		if (ft_strlen(line) == 0 && ln == 6 && (ln = 1))
-		{
-			if (!(get_piece(input, p_array, pieces_arr, &size)))
-				return (0);
-			falloc(1, &input, &line, &pn);
-		}
-		else if (ft_strlen(line) != 4)
+		input[ret] = '\0';
+		if (!(get_piece(input, p_array, pieces_arr, &size)))
 			return (0);
+		pn++;
 	}
-	if (ft_strlen(input) == 20 && ln == 5 && (falloc(2, &input, &line, &pn)))
-		if (!(get_piece(input, p_array, pieces_arr, &size) && (++pn)))
+	if (ret == 20 && pn < 26)
+	{
+		if (!(get_piece(input, p_array, pieces_arr, &size)))
 			return (0);
-	if (ln != 5)
+		pn++;
+	}
+	else
 		return (0);
 	return ((pn == 1) ? 2 : size / pn);
 }

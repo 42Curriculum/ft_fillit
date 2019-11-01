@@ -1,6 +1,6 @@
 NAME 		:=	fillit
 
-F_N			:=	fillit solver main stuff_we_need check_piece
+F_N			:=	reader solver main board check_piece
 FILES		:=	$(addprefix fillit_srcs/, $(addsuffix .c, $(F_N)))
 OBJS		:=	$(addprefix objects/, $(addsuffix .o, $(F_N)))	
 

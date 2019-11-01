@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 13:46:17 by jjosePhi          #+#    #+#             */
-/*   Updated: 2019/10/28 20:50:39 by jjosephi         ###   ########.fr       */
+/*   Updated: 2019/11/01 16:14:56 by asultanb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,12 @@
 # include "../libft/libft.h"
 # include <stdlib.h>
 # include <unistd.h>
-# include "../libft/get_next_line.h"
 # include <fcntl.h>
+
+# define LINE_SIZE 21
+# define TRUE 1
+# define FALSE 0
+
 # define P1 "#\n#\n#\n#"
 # define P2 "##\n##"
 # define P3 "####"
@@ -49,11 +53,10 @@ int					err_display();
 int					solver(int (*p)[], t_board *b, char *m[], int i);
 int					if_next_line(int pos, int i, int s, int m);
 int					read_file(int fd, char **p, int (*pa)[], int size);
-char				*ft_strfjoin(char **s1, char const *s2);
-int					falloc(int flag, char **input, char **line, int *pn);
 void				print_n_free(t_board **b);
 int					p_count(int *str);
 char				*new_board(int size, t_board **b);
 int					check_hashes(char *buff);
+void				clear_board(t_board **board);
 
 #endif
