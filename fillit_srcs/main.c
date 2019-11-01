@@ -6,7 +6,7 @@
 /*   By: jjosephi <jjosephi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 12:19:27 by asultanb          #+#    #+#             */
-/*   Updated: 2019/10/29 16:10:23 by asultanb         ###   ########.fr       */
+/*   Updated: 2019/10/31 12:03:36 by jjosephi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,20 @@ int				err_display(void)
 	return (0);
 }
 
-static int		check_file(int fd)
+static int		check_file(int fd, char *arg)
 {
 	int		b;
 	char	buffer[141];
-
+	
+	close (fd);
+	fd = open(arg, O_RDONLY);
 	while ((b = read(fd, buffer, 140)))
 	{
 		buffer[b] = '\0';
 	}
 	close(fd);
 	b = ft_strlen(buffer);
-	if (b > 4 && buffer[b - 1] == '\n')
+	if (b > 4 && buffer[b - 1] == '\n' && b <= 130)
 		return (TRUE);
 	return (FALSE);
 }
@@ -73,8 +75,8 @@ int				main(int argc, char **argv)
 	board = var_init(pieces);
 	if (argc == 2)
 	{
-		fd = open(argv[1], O_RDONLY);
-		if (check_file(fd) == 0)
+		fd = open(argv[1], O_RDONLY | O_DIRECTORY);
+		if (fd >= 0 || check_file(fd, argv[1]) == 0)
 			return (err_display());
 		fd = open(argv[1], O_RDONLY);
 		if (!(size = read_file(fd, pieces, &pieces_arr, 0)))
